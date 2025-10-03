@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Coming Soon — Your Company</title>
+  <meta name="description" content="We’re launching soon. Subscribe to get notified." />
+  <link rel="icon" href="data:," />
+  <style>
+    :root{
+      --bg1:#0f172a;   /* primary background */
+      --bg2:#063970;   /* accent */
+      --accent:#00d1b2;/* accent color */
+      --text:#e6eef8;
+      --muted:#a7b4c7;
+      --container-max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+    body{
+      background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      display:flex; align-items:center; justify-content:center;
+      padding:40px;
+    }
+    .card{
+      width:100%;
+      max-width:var(--container-max);
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:16px; padding:48px;
+      box-shadow:0 8px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+      display:grid; grid-template-columns:1fr 360px; gap:32px;
+      align-items:center;
+    }
+    @media (max-width:880px){ .card{grid-template-columns:1fr; padding:32px} }
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#6be7ff);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#032; font-size:20px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.5), inset 0 -6px 18px rgba(255,255,255,0.03);
+    }
+    h1{margin:8px 0 6px;font-size:30px;line-height:1.05}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .countdown{display:flex;gap:10px}
+    .countdown > div{min-width:58px;background:rgba(255,255,255,0.03);padding:12px;border-radius:10px;text-align:center}
+    .countdown .num{font-weight:700;font-size:18px}
+    .right{background:rgba(255,255,255,0.02); padding:22px;border-radius:12px}
+    form{display:flex;gap:8px;align-items:center}
+    input[type="email"]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);outline:none}
+    button{padding:12px 16px;border-radius:10px;border:0;background:var(--accent);color:#002; font-weight:700;cursor:pointer}
+    .small{font-size:13px;color:var(--muted)}
+    .socials{display:flex;gap:10px;margin-top:12px}
+    a.social{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--text);text-decoration:none}
+    footer{font-size:12px;color:var(--muted);text-align:center;margin-top:20px}
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div>
+      <div class="brand">
+        <div class="logo">YC</div>
+        <div>
+          <div class="small">Your Company</div>
+          <h1>We’re launching something great.</h1>
+          <p class="lead">A smart, beautiful product is almost ready. Join our list to be the first to know.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:22px">
+        <div class="meta">
+          <div class="countdown" aria-hidden="true">
+            <div><div class="num" id="d">00</div><div class="small">Days</div></div>
+            <div><div class="num" id="h">00</div><div class="small">Hours</div></div>
+            <div><div class="num" id="m">00</div><div class="small">Minutes</div></div>
+            <div><div class="num" id="s">00</div><div class="small">Seconds</div></div>
+          </div>
+          <div style="margin-left:auto" class="small">Contact us: <a href="mailto:hello@example.com" style="color:var(--accent);text-decoration:none">hello@example.com</a></div>
+        </div>
+      </div>
+
+      <div style="margin-top:26px">
+        <p class="small">Need collaboration, press, or partnership? Drop us a note.</p>
+        <div class="socials" aria-hidden="true">
+          <a class="social" href="#" title="Twitter">T</a>
+          <a class="social" href="#" title="LinkedIn">in</a>
+          <a class="social" href="#" title="GitHub">GH</a>
+        </div>
+      </div>
+
+      <footer>© <span id="year"></span> Your Company — All rights reserved.</footer>
+    </div>
+
+    <aside class="right" aria-label="Subscribe">
+      <h2 style="margin-top:0">Get notified</h2>
+      <p class="small">Enter your email and we’ll send you an update when we launch.</p>
+
+      <!--
+        Replace FORM_ACTION with your form endpoint (Formspree, Netlify Forms, or your backend).
+        Example Formspree action: https://formspree.io/f/YOUR_ID
+      -->
+      <form id="notifyForm" action="<!-- FORM_ACTION -->" method="POST" onsubmit="return handleForm(event)">
+        <input id="email" name="email" type="email" placeholder="you@company.com" required />
+        <button type="submit">Notify me</button>
+      </form>
+
+      <div id="msg" class="small" style="margin-top:12px"></div>
+      <div style="margin-top:18px" class="small">We respect your privacy. No spam.</div>
+    </aside>
+  </div>
+
+  <script>
+    // CONFIG: change targetDate (YYYY, M-1, D, h, m, s)
+    const targetDate = new Date(2025, 11, 1, 10, 0, 0); // Example: Dec 1, 2025 10:00
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function updateCountdown(){
+      const now = new Date();
+      let diff = Math.max(0, targetDate - now);
+      const d = Math.floor(diff / (1000*60*60*24)); diff -= d*(1000*60*60*24);
+      const h = Math.floor(diff / (1000*60*60)); diff -= h*(1000*60*60);
+      const m = Math.floor(diff / (1000*60)); diff -= m*(1000*60);
+      const s = Math.floor(diff / 1000);
+      document.getElementById('d').textContent = String(d).padStart(2,'0');
+      document.getElementById('h').textContent = String(h).padStart(2,'0');
+      document.getElementById('m').textContent = String(m).padStart(2,'0');
+      document.getElementById('s').textContent = String(s).padStart(2,'0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Simple form handler: either send to FORM_ACTION (if set) OR fallback to mailto
+    function handleForm(e){
+      const form = e.target;
+      const action = form.getAttribute('action') || '';
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg');
+      if(!email){ msg.textContent = 'Please enter an email.'; return false; }
+
+      if(action && action.indexOf('<!--')===-1){
+        // Let the browser submit normally if an action is set.
+        msg.textContent = 'Submitting…';
+        return true;
+      } else {
+        // fallback: open mail client (simple, no backend)
+        window.location.href = 'mailto:hello@example.com?subject=Notify%20me&body=Please%20notify%20'+encodeURIComponent(email);
+        msg.textContent = 'Opened mail client as fallback.';
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
