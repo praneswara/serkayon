@@ -1,155 +1,514 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Coming Soon — Your Company</title>
-  <meta name="description" content="We’re launching soon. Subscribe to get notified." />
-  <link rel="icon" href="data:," />
-  <style>
-    :root{
-      --bg1:#0f172a;   /* primary background */
-      --bg2:#063970;   /* accent */
-      --accent:#00d1b2;/* accent color */
-      --text:#e6eef8;
-      --muted:#a7b4c7;
-      --container-max:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
-    body{
-      background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      display:flex; align-items:center; justify-content:center;
-      padding:40px;
-    }
-    .card{
-      width:100%;
-      max-width:var(--container-max);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border-radius:16px; padding:48px;
-      box-shadow:0 8px 30px rgba(2,6,23,0.6);
-      backdrop-filter: blur(6px);
-      display:grid; grid-template-columns:1fr 360px; gap:32px;
-      align-items:center;
-    }
-    @media (max-width:880px){ .card{grid-template-columns:1fr; padding:32px} }
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{
-      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#6be7ff);
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:#032; font-size:20px;
-      box-shadow:0 6px 18px rgba(2,6,23,0.5), inset 0 -6px 18px rgba(255,255,255,0.03);
-    }
-    h1{margin:8px 0 6px;font-size:30px;line-height:1.05}
-    p.lead{color:var(--muted);margin:0 0 18px}
-    .meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .countdown{display:flex;gap:10px}
-    .countdown > div{min-width:58px;background:rgba(255,255,255,0.03);padding:12px;border-radius:10px;text-align:center}
-    .countdown .num{font-weight:700;font-size:18px}
-    .right{background:rgba(255,255,255,0.02); padding:22px;border-radius:12px}
-    form{display:flex;gap:8px;align-items:center}
-    input[type="email"]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);outline:none}
-    button{padding:12px 16px;border-radius:10px;border:0;background:var(--accent);color:#002; font-weight:700;cursor:pointer}
-    .small{font-size:13px;color:var(--muted)}
-    .socials{display:flex;gap:10px;margin-top:12px}
-    a.social{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--text);text-decoration:none}
-    footer{font-size:12px;color:var(--muted);text-align:center;margin-top:20px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serkayon Pvt Limited - Launching Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 119, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(138, 221, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .logo-container {
+            margin-bottom: 60px;
+            text-align: center;
+            animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 200;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, #a8b5ff 50%, #ffa8f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 25px;
+        }
+
+        .launch-info {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .launch-title {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .launch-subtitle {
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff 0%, #ffd4f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .time-box {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 50px;
+            min-width: 140px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .time-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .time-box:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(168, 181, 255, 0.2);
+        }
+
+        .time-box:hover::before {
+            opacity: 1;
+        }
+
+        .time-value {
+            font-size: 4rem;
+            font-weight: 200;
+            display: block;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffa8f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        .notify-section {
+            text-align: center;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .notify-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .notify-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .email-input {
+            padding: 18px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .notify-btn {
+            padding: 18px 45px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, rgba(168, 181, 255, 0.2) 0%, rgba(255, 168, 245, 0.2) 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notify-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(168, 181, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .notify-btn:hover::before {
+            left: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(168, 181, 255, 0.2);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            animation: fadeIn 2s ease-out 1.5s backwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 6px;
+            }
+
+            .tagline {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+
+            .launch-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .time-box {
+                padding: 30px 35px;
+                min-width: 110px;
+            }
+
+            .time-value {
+                font-size: 3rem;
+            }
+
+            .email-input {
+                min-width: 280px;
+            }
+
+            .notify-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="card" role="main">
-    <div>
-      <div class="brand">
-        <div class="logo">YC</div>
-        <div>
-          <div class="small">Your Company</div>
-          <h1>We’re launching something great.</h1>
-          <p class="lead">A smart, beautiful product is almost ready. Join our list to be the first to know.</p>
-        </div>
-      </div>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
 
-      <div style="margin-top:22px">
-        <div class="meta">
-          <div class="countdown" aria-hidden="true">
-            <div><div class="num" id="d">00</div><div class="small">Days</div></div>
-            <div><div class="num" id="h">00</div><div class="small">Hours</div></div>
-            <div><div class="num" id="m">00</div><div class="small">Minutes</div></div>
-            <div><div class="num" id="s">00</div><div class="small">Seconds</div></div>
-          </div>
-          <div style="margin-left:auto" class="small">Contact us: <a href="mailto:hello@example.com" style="color:var(--accent);text-decoration:none">hello@example.com</a></div>
+    <div class="container">
+        <div class="logo-container">
+            <h1 class="logo">SERKAYON</h1>
+            <p class="tagline">Private Limited</p>
         </div>
-      </div>
 
-      <div style="margin-top:26px">
-        <p class="small">Need collaboration, press, or partnership? Drop us a note.</p>
-        <div class="socials" aria-hidden="true">
-          <a class="social" href="#" title="Twitter">T</a>
-          <a class="social" href="#" title="LinkedIn">in</a>
-          <a class="social" href="#" title="GitHub">GH</a>
+        <div class="launch-info">
+            <p class="launch-title">Launching In</p>
+            <h2 class="launch-subtitle">Something Extraordinary</h2>
         </div>
-      </div>
 
-      <footer>© <span id="year"></span> Your Company — All rights reserved.</footer>
+        <div class="countdown" id="countdown">
+            <div class="time-box">
+                <span class="time-value" id="days">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">Seconds</span>
+            </div>
+        </div>
+
+        <div class="notify-section">
+            <p class="notify-title">Be among the first to experience innovation</p>
+            
+            <div class="notify-form">
+                <input type="email" class="email-input" placeholder="Enter your email address" id="emailInput">
+                <button class="notify-btn" onclick="notifyMe()">Get Notified</button>
+            </div>
+
+            <!-- <div class="social-links">
+                <a href="#" class="social-link" title="LinkedIn">💼</a>
+                <a href="#" class="social-link" title="Twitter">🐦</a>
+                <a href="#" class="social-link" title="Instagram">📷</a>
+                <a href="#" class="social-link" title="Facebook">📘</a>
+            </div> -->
+        </div>
+
+        <div class="footer">© 2025 Serkayon Pvt Limited. All Rights Reserved.</div>
     </div>
 
-    <aside class="right" aria-label="Subscribe">
-      <h2 style="margin-top:0">Get notified</h2>
-      <p class="small">Enter your email and we’ll send you an update when we launch.</p>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
 
-      <!--
-        Replace FORM_ACTION with your form endpoint (Formspree, Netlify Forms, or your backend).
-        Example Formspree action: https://formspree.io/f/YOUR_ID
-      -->
-      <form id="notifyForm" action="<!-- FORM_ACTION -->" method="POST" onsubmit="return handleForm(event)">
-        <input id="email" name="email" type="email" placeholder="you@company.com" required />
-        <button type="submit">Notify me</button>
-      </form>
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-      <div id="msg" class="small" style="margin-top:12px"></div>
-      <div style="margin-top:18px" class="small">We respect your privacy. No spam.</div>
-    </aside>
-  </div>
+        createParticles();
 
-  <script>
-    // CONFIG: change targetDate (YYYY, M-1, D, h, m, s)
-    const targetDate = new Date(2025, 11, 1, 10, 0, 0); // Example: Dec 1, 2025 10:00
-    document.getElementById('year').textContent = new Date().getFullYear();
+        // Set launch date to 2 days from now
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 2);
+        launchDate.setHours(0, 0, 0, 0);
 
-    function updateCountdown(){
-      const now = new Date();
-      let diff = Math.max(0, targetDate - now);
-      const d = Math.floor(diff / (1000*60*60*24)); diff -= d*(1000*60*60*24);
-      const h = Math.floor(diff / (1000*60*60)); diff -= h*(1000*60*60);
-      const m = Math.floor(diff / (1000*60)); diff -= m*(1000*60);
-      const s = Math.floor(diff / 1000);
-      document.getElementById('d').textContent = String(d).padStart(2,'0');
-      document.getElementById('h').textContent = String(h).padStart(2,'0');
-      document.getElementById('m').textContent = String(m).padStart(2,'0');
-      document.getElementById('s').textContent = String(s).padStart(2,'0');
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
 
-    // Simple form handler: either send to FORM_ACTION (if set) OR fallback to mailto
-    function handleForm(e){
-      const form = e.target;
-      const action = form.getAttribute('action') || '';
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('msg');
-      if(!email){ msg.textContent = 'Please enter an email.'; return false; }
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<h2 style="font-size: 2.5rem; font-weight: 300; letter-spacing: 4px;">WE ARE LIVE</h2>';
+                return;
+            }
 
-      if(action && action.indexOf('<!--')===-1){
-        // Let the browser submit normally if an action is set.
-        msg.textContent = 'Submitting…';
-        return true;
-      } else {
-        // fallback: open mail client (simple, no backend)
-        window.location.href = 'mailto:hello@example.com?subject=Notify%20me&body=Please%20notify%20'+encodeURIComponent(email);
-        msg.textContent = 'Opened mail client as fallback.';
-        return false;
-      }
-    }
-  </script>
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        function notifyMe() {
+            const email = document.getElementById('emailInput').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && emailRegex.test(email)) {
+                alert('Thank you for your interest! We will notify you at ' + email + ' when we launch.');
+                document.getElementById('emailInput').value = '';
+            } else {
+                alert('Please enter a valid email address');
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Allow Enter key to submit email
+        document.getElementById('emailInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                notifyMe();
+            }
+        });
+    </script>
 </body>
 </html>
